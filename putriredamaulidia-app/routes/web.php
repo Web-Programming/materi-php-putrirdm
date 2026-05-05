@@ -70,3 +70,29 @@ Route::delete('/hapus/{id}', function($id){
 Route::get('/test-method', function(){
     return view('test_method');
 });
+
+use App\Http\Controllers\ProductController;
+//php artisan make:controller ProductController --resource
+Route::resource('/produk', ProductController::class);
+Route::get('/produk/search', ProductController::class.'@search');
+
+//Suplier
+// Route::get('/supplier/', function(){
+//     return view('supplier.index');
+// });
+
+//php artisan make:controller SupplierController --resource
+
+Route::resource('/supplier', SupplierController::class);
+use App\Http\Controllers\SupplierController;
+//php artisan make:controller ProductController --resource
+Route::resource('/produk', SupplierController::class);
+Route::get('/produk/search', SupplierController::class.'@search');
+
+//Suplier
+// Route::get('/supplier/', function(){
+//     return view('supplier.index');
+// });
+
+//php artisan make:controller SupplierController --resource
+Route::resource('/supplier', SupplierController::class);

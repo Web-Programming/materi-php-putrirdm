@@ -2,18 +2,17 @@
 
 namespace App\Http\Controllers;
 
-use App\Models\Barang;
-use Illuminate\Support\Facades\Auth;
+use App\Models\Product;
 
 class DashboardController extends Controller
 {
     public function index()
     {
-        $totalBarang = Barang::count();
-        $barangTersedia = Barang::where('status', 1)->count();
-        $barangHabis = Barang::where('status', 0)->count();
-        $nilaiStok = 'Rp ' . number_format(Barang::sum('harga'), 0, ',', '.');
-        $barangTerbaru = Barang::latest()->take(5)->get();
+        $totalBarang = Product::count();
+        $barangTersedia = Product::where('is_active', 1)->count();
+        $barangHabis = Product::where('is_active', 0)->count();
+        $nilaiStok = 'Rp ' . number_format(Product::sum('price'), 0, ',', '.');
+        $barangTerbaru = Product::latest()->take(5)->get();
         return view('dashboard', compact(
             'totalBarang',
             'barangTersedia',

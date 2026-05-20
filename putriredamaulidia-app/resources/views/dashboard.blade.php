@@ -87,7 +87,7 @@
                 <thead class="table-light">
                     <tr>
                         <th>Nama Barang</th>
-                        <th>Jumlah</th>
+                        <th>Deskripsi</th>
                         <th>Harga</th>
                         <th>Status</th>
                     </tr>
@@ -95,11 +95,11 @@
                 <tbody>
                     @forelse ($barangTerbaru as $barang)
                         <tr>
-                            <td>{{ $barang->nama_barang }}</td>
-                            <td>{{ $barang->jumlah }}</td>
-                            <td>Rp {{ number_format($barang->harga, 0, ',', '.') }}</td>
+                            <td>{{ $barang->name }}</td>
+                            <td>{{ $barang->description }}</td>
+                            <td>Rp {{ number_format($barang->price, 0, ',', '.') }}</td>
                             <td>
-                                @if ($barang->status)
+                                @if ($barang->is_active)
                                     <span class="badge bg-success">Tersedia</span>
                                 @else
                                     <span class="badge bg-danger">Habis</span>
@@ -116,7 +116,7 @@
             </table>
         </div>
         <div class="card-footer text-end">
-            <a href="{{ url('/barang') }}" class="btn btn-outline-primary btn-sm">Lihat Semua Barang</a>
+            <a href="{{ url('/produk') }}" class="btn btn-outline-primary btn-sm">Lihat Semua Barang</a>
         </div>
     </div>
 @endsection

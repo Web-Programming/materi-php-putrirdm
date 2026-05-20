@@ -4,7 +4,7 @@
 
 // //Route ke halaman utama (home)
 // Route::get('/', function () {
-//     echo "Hallo, Nama Saya Putri Angel Li";
+//     echo "Hallo, Nama Saya Pak JR";
 //     //return view('welcome');
 // });
 // //Route ke halaman alamat
@@ -121,13 +121,16 @@
 // Route::resource('/supplier', SupplierController::class);
 
 use Illuminate\Support\Facades\Route;
-use App\Http\Controllers\BarangController;
+use App\Http\Controllers\ProductController;
+use App\Http\Controllers\SupplierController;
 use App\Http\Controllers\AuthController;
 use App\Http\Controllers\DashboardController;
+
 // ==================== HOME ====================
 Route::get('/', function () {
     return view('home');
 })->name('home');
+
 // ==================== ROUTE AUTHENTIKASI ====================
 // Tampilkan form register
 Route::get('/register', [AuthController::class, 'registerForm'])
@@ -152,13 +155,9 @@ Route::post('/logout', [AuthController::class, 'logout'])
 // Semua route di dalam group ini hanya bisa diakses jika sudah login
 Route::middleware('auth')->group(function () {
     Route::get('/dashboard', [DashboardController::class, 'index'])->name('dashboard');
-    Route::get('/barang', [BarangController::class, 'index']);
-    Route::get('/barang/create', [BarangController::class, 'create']);
-    Route::get('/barang/{id}', [BarangController::class, 'show']);
-    Route::get('/barang/edit/{id}', [BarangController::class, 'edit']);
-    Route::post('/barang', [BarangController::class, 'store']);
-    Route::put('/barang/update/{id}', [BarangController::class, 'update']);
-    Route::delete('/barang/{id}', [BarangController::class, 'destroy']);
+    Route::resource('/produk', ProductController::class);
+    Route::get('/produk/search', ProductController::class.'@search');
     //Daftarkan Route Lainnya di Sini :
     // - Route Supplier
+    Route::resource('/supplier', SupplierController::class);
 });
